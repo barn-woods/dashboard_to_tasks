@@ -26,7 +26,7 @@ def la_columns_and_format_sheet(file_instance, file_name):
                      'dropdown': True, 'error_title': 'Invalid input',
                      'error_message': 'Please select an action from the dropdown'})
     worksheet.freeze_panes(1, 0)
-    worksheet.autofilter(f"A1:{last_column}{num_rows}")
+    worksheet.autofilter(f"A1:B2")
     # worksheet.autofit()
     workbook.close()
 
