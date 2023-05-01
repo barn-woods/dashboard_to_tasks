@@ -1,4 +1,5 @@
 import openpyxl
+from os.path import exists
 from summary_sheet_tests import *
 from la_columns import *
 from geo_info_from_json import *
@@ -13,11 +14,12 @@ the json_geo_info function in the geo_info_from_json script.
 """
 
 
-def produce_files(input_file, json_file=None, la_name=None):
-    if pd.notnull(json_file):
-        json_geo_info(json_file)
+def produce_files(input_file, la_name=None):
+    if exists('extract_with_modified_columns.csv'):
+        print('extract_with_modified_columns.csv identified spatial columns will be generated')
         json_df = pd.read_csv('extract_with_modified_columns.csv')
     else:
+        print('No extract_with_modified_columns.csv identified spatial columns will not be generated')
         json_df = None
     summary_sheet = openpyxl.load_workbook(input_file)['Summary']
     cell_range = list(string.ascii_uppercase[11: 20])  # Define the range of columns containing data

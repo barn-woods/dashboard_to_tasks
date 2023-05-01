@@ -15,6 +15,5 @@ and a free text column LA_comment.
 
 To run simply change the dashboard_file_path in the script main.py
 to the file path of the relevant dashboard and run main.py. There is also the
-option to return geometry data using a json extract file. Simply change the
-file path of the dashboard_file_path to relevant json file in the main.py
-script.
+option to return geometry data using a json extract file and an option to
+add the LA name. Simply follow the comment instructions in the main.py script.
