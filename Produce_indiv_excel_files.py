@@ -18,9 +18,11 @@ def produce_files(input_file, la_name=None):
     if exists('extract_with_modified_columns.csv'):
         print('extract_with_modified_columns.csv identified spatial columns will be generated')
         json_df = pd.read_csv('extract_with_modified_columns.csv')
+        json_present = True
     else:
         print('No extract_with_modified_columns.csv identified spatial columns will not be generated')
         json_df = None
+        json_present = False
     summary_sheet = openpyxl.load_workbook(input_file)['Summary']
     cell_range = list(string.ascii_uppercase[11: 20])  # Define the range of columns containing data
     print(f'extracting info from columns: {cell_range}')
@@ -83,7 +85,7 @@ def produce_files(input_file, la_name=None):
         check_name = la_name + '_small_area_check'
     else:
         check_name = 'small_area_check'
-    create_excel_sheets(df=small_area_check, df_name=check_name, json_data=json_df, json_present=json_file)
+    create_excel_sheets(df=small_area_check, df_name=check_name, json_data=json_df, json_present=json_present)
 
     # Create a dataframe for the large area checks and short geo desc checks
     concat_list = ['large_area_checks', 'short_geo_desc_checks']
@@ -97,7 +99,7 @@ def produce_files(input_file, la_name=None):
             value.name = la_name + '_' + value_name
         else:
             value.name = value_name
-        create_excel_sheets(df=value, df_name=value.name, json_data=json_df, json_present=json_file)
+        create_excel_sheets(df=value, df_name=value.name, json_data=json_df, json_present=json_present)
 
     # Create a dataframes for the other checks
     for check, sheet in zip(dict_check_lists['other_checks'], dict_sheet_lists['other_checks_sheet']):
@@ -106,7 +108,7 @@ def produce_files(input_file, la_name=None):
             check_df.name = la_name + '_' + check
         else:
             check_df.name = check
-        create_excel_sheets(df=check_df, df_name=check_df.name, json_data=json_df, json_present=json_file)
+        create_excel_sheets(df=check_df, df_name=check_df.name, json_data=json_df, json_present=json_present)
 
 
 """
@@ -117,7 +119,7 @@ Create the excel file form each dataframe.
 def create_excel_sheets(df, df_name, json_present, json_data):
     if len(df) > 0:
         print(f'{df_name} length = {len(df)} rows')
-        if pd.notnull(json_present):
+        if json_present is True:
             df = df.merge(json_data, left_on='originating_authority_charge_identifier',
                           right_on='originating-authority-charge-identifier', how='left').drop(
                 columns=['originating-authority-charge-identifier'])
