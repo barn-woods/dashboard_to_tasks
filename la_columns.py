@@ -1,6 +1,5 @@
 import pandas as pd
 import string
-from openpyxl import load_workbook
 """
 Add a column with dropdown options called LA_action, a free text column called LA_comments,
 format the column widths to be the same as the max character sting in the column +4 unless this is greater than 35
