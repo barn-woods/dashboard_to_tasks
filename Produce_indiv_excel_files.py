@@ -79,8 +79,8 @@ def produce_files(input_file, la_name=None):
                                   dict_sheet_lists['small_area_checks_comp_sheet']):
         check = pd.read_excel(input_file, sheet_name=check_sheet, skiprows=1)
         dict_combined_check_dfs['small_area_checks_comp_dfs'].append(check)
-    small_area_check = pd.concat(dict_combined_check_dfs['small_area_checks_adv_dfs']).append(pd.concat(
-        dict_combined_check_dfs['small_area_checks_comp_dfs']))
+    small_area_check = pd.concat([pd.concat(dict_combined_check_dfs['small_area_checks_adv_dfs']), pd.concat(
+        dict_combined_check_dfs['small_area_checks_comp_dfs'])])
     if la_name is not None:
         check_name = la_name + '_small_area_check'
     else:

@@ -1,5 +1,6 @@
 import pandas as pd
 import string
+import pandas.io.formats.excel
 """
 Add a column with dropdown options called LA_action, a free text column called LA_comments,
 format the column widths to be the same as the max character sting in the column +4 unless this is greater than 35
@@ -21,6 +22,7 @@ def la_columns_and_format_sheet(file_instance, file_name):
     last_column = string.ascii_uppercase[num_cols - 1]
     la_act = file_instance.columns.get_loc('LA_action')
     writer = pd.ExcelWriter(file_name + '.xlsx', engine='xlsxwriter')
+    pandas.io.formats.excel.ExcelFormatter.header_style = None
     file_instance.to_excel(writer, sheet_name='Sheet1', index=False)
     workbook = writer.book
     worksheet = writer.sheets['Sheet1']
@@ -40,5 +42,4 @@ def la_columns_and_format_sheet(file_instance, file_name):
     worksheet.set_column(0, stat_prov, 20, format_align)
     worksheet.set_column(0, geo_desc, 31, format_align)
     worksheet.set_column(0, sup_info, 34, format_align)
-
     workbook.close()
