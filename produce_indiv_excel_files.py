@@ -70,6 +70,7 @@ def produce_files(input_file, la_name=None):
         'large_area_checks_dfs': [],
         'short_geo_desc_checks_dfs': []
     }
+
     # Create a dataframe for the small area checks
     for check, check_sheet in zip(dict_check_lists['small_area_checks'],
                                   dict_sheet_lists['small_area_checks_adv_sheet']):

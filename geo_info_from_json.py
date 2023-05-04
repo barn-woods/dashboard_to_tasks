@@ -7,16 +7,18 @@ import geopandas as gpd
 
 tqdm.pandas()
 
+"""
+Count the number of instances of a geometry type for a given charge
+"""
 
-def func(row):
-    time.sleep(1)
-    return row + 1
-
-
-# from shapefile import convert_csv_to_shapefile
 
 def count_geo_types(row, geo_type):
     return str(row['geometry']).count(geo_type)
+
+
+"""
+Calculate a mean area, standard deviation of areas, smallest areas and largest areas for goes
+"""
 
 
 def area_stats(row, stat):
@@ -36,6 +38,11 @@ def area_stats(row, stat):
         return smallest_area
     else:
         return largest_area
+
+
+"""
+Calculate stats for the extract using the above count_geo_types and area_stats functions
+"""
 
 
 def json_geo_info(input_file):
