@@ -14,12 +14,15 @@ def la_columns_and_format_sheet(file_instance, file_name):
     file_instance['LA_action'] = None
     file_instance['LA_comment'] = None
     # get the position the columns: statutory_provision, charge_geographic_description and supplementary_information
+    stat_prov = 0
+    geo_desc = 0
+    sup_info = 0
     if 'statutory_provision' in file_instance.columns:
-        stat_prov = file_instance.columns.get_loc('statutory_provision')
+        stat_prov += file_instance.columns.get_loc('statutory_provision')
     if 'charge_geographic_description' in file_instance.columns:
-        geo_desc = file_instance.columns.get_loc('charge_geographic_description')
+        geo_desc += file_instance.columns.get_loc('charge_geographic_description')
     if 'supplementary_information' in file_instance.columns:
-        sup_info = file_instance.columns.get_loc('supplementary_information')
+        sup_info += file_instance.columns.get_loc('supplementary_information')
     # get the position of the last row and last column
     num_cols = len(file_instance.columns)  # numerical last column position
     num_rows = int(len(file_instance) + 1)  # numerical row position
