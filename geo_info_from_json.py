@@ -2,7 +2,6 @@ import json
 import pandas as pd
 import numpy as np
 from tqdm import tqdm
-import time
 import geopandas as gpd
 
 tqdm.pandas()
